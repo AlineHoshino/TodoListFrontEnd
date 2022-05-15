@@ -1,9 +1,13 @@
-const todoService = require('../services/TodoService');
+const Todo = require('../models/TodoModel');
 
-const todoController = async (req, res) => {
-  const { description, status } = req.body;
-  const task = await todoService.todoCreate({ description, status });
-  return res.status(201).json(task);
+const create = async (request, response) => {
+  const { title, task, priority } = request.body;
+  const taskCreated = await Todo.create({
+    title,
+    task,
+    priority,
+  });
+  return response.status(201).json(taskCreated);
 };
 
-module.exports = todoController;
+module.exports = { create };
