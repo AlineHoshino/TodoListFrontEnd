@@ -15,7 +15,7 @@ const update = async (request, response) => {
     task.priority = true;
   }
   await task.save();
-  
+  return response.status(200).json(task);
 };
 
 module.exports = {
