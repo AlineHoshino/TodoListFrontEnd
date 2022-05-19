@@ -7,14 +7,15 @@ import './main.css';
 import Tasks from './Components/Tasks';
 import RadioButton from './RadioButton';
 
-
+//Aqui lista todas as tarefas
 function App() {
   useEffect(() =>{
-    async function getAllNotes(){
+    async function getAllTasks(){
       const response = await api.get('/todo');
+      console.log(response)
       setAllTasks(response.data)
     }
-    getAllNotes()
+    getAllTasks()
   },[])
 
   const [title, setTitle] = React.useState('');
@@ -23,6 +24,8 @@ function App() {
   const [status, setStatus] = React.useState('pendente');
   const [data, setData] = React.useState();
   
+
+//Aqui cria novas tarefas
   async function handleSubmit(e) {
     e.preventDefault();
     const response = await api.post('/todo', {
@@ -45,7 +48,7 @@ function App() {
         <form onSubmit={handleSubmit}>
           <div className="input-block">
           <label htmlFor="title">Título da tarefa</label>
-          <input value={title} onChange={e=> setTitle(e.target.value)}/>
+          <input maxLength="30" value={title} onChange={e=> setTitle(e.target.value)}/>
           </div>
           <div className="input-block">
             <label htmlFor="nota">Tarefas</label>
