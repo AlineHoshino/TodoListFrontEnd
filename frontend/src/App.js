@@ -5,6 +5,7 @@ import './global.css';
 import './sidebar.css';
 import './main.css';
 import Tasks from './Components/Tasks';
+import RadioButton from './RadioButton';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
             <input type="date" value={data} onChange={e=>setData(e.target.value)}></input>
           </div>
           <button type="submit">Salvar</button>
+          <RadioButton/>
         </form>
       </aside>
       <main>
