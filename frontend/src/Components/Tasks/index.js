@@ -1,4 +1,6 @@
 import React from 'react';
+import { AiTwotoneDelete, AiOutlineExclamationCircle} from 'react-icons/ai'
+
 function Tasks({data}){
     return (
        <>
@@ -6,11 +8,11 @@ function Tasks({data}){
         <div>
           <strong>{data.title}</strong>
           <div>
-            x
+            < AiTwotoneDelete/>
           </div>
         </div>
         <textarea>{data.task}</textarea>
-        <span>!</span>
+        <span><AiOutlineExclamationCircle/></span>
         <span>{data.status}</span>
         <span>{data.date}</span>
         </li>
