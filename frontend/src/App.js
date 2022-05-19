@@ -23,7 +23,14 @@ function App() {
   const [allTasks, setAllTasks] = React.useState([]);
   const [status, setStatus] = React.useState('pendente');
   const [data, setData] = React.useState();
-  
+
+//Aqui deleta tarefa
+ async function handleDelete(id) {
+   const deletedTask = await api.delete(`todo/${id}`);
+   if(deletedTask){
+     setAllTasks(allTasks.filter(task => task._id !== id))
+   }
+}
 
 //Aqui cria novas tarefas
   async function handleSubmit(e) {
@@ -70,7 +77,10 @@ function App() {
       <main>
       <ul>
         {allTasks.map(data=>(
-          <Tasks data={data}/>
+          <Tasks key={ data._id }
+          data={data}
+          handleDelete={handleDelete}
+          />
         ))}
       </ul>
       </main>

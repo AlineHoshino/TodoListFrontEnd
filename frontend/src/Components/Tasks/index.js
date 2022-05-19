@@ -4,7 +4,7 @@ import './style.css';
 import './style-priority.css';
 import api from '../../services/api';
 
-function Tasks({data}){
+function Tasks({data, handleDelete}){
   const [changedTask, setChangedTask] = React.useState('');
   const [changeStatus, setChangeStatus] = React.useState('')
   console.log(changeStatus)
@@ -22,7 +22,10 @@ function Tasks({data}){
         <div>
           <strong>{data.title}</strong>
           <div>
-            < AiTwotoneDelete size="24"/>
+            < AiTwotoneDelete 
+            size="24"
+            onClick={() => handleDelete(data._id)}
+            />
           </div>
         </div>
         <textarea 
