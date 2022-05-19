@@ -19,7 +19,7 @@ router.post('/priorities/:id', PriorityController.update);
 
 // Rota Content
 
-router.put('/content/:id', validContent, ContentController.update);
+router.post('/content/:id', validContent, ContentController.update);
 // Rota Teste
 router.get('/api', (_req, res) => {
   res.status(200).send({ message: 'Bem vindo!' });

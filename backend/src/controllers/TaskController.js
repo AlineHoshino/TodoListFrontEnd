@@ -6,11 +6,15 @@ const read = async (request, response) => {
 };
 
 const create = async (request, response) => {
-  const { title, task, priority } = request.body;
+  const {
+    title, task, priority, status, date,
+  } = request.body;
   const taskCreated = await Todo.create({
     title,
     task,
     priority,
+    status,
+    date,
   });
   return response.status(201).json(taskCreated);
 };
