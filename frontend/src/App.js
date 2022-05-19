@@ -10,19 +10,38 @@ import RadioButton from './RadioButton';
 //Aqui lista todas as tarefas
 function App() {
   useEffect(() =>{
-    async function getAllTasks(){
-      const response = await api.get('/todo');
-      console.log(response)
-      setAllTasks(response.data)
-    }
     getAllTasks()
   },[])
 
+  async function getAllTasks(){
+    const response = await api.get('/todo');
+    console.log(response)
+    setAllTasks(response.data)
+  }
+
+  async function loadTasks(option){
+    const params = {priority:option};
+    const response = await api.get('/priorities', { params });
+    if(response) {
+      setAllTasks(response.data)
+    }
+  }
+
+  function handleChange(e) {
+    setSelectedValue(e.value);
+
+    if(e.checked && e.value !=='all'){
+      loadTasks(e.value);
+    }else {
+      getAllTasks();
+    }
+  }
   const [title, setTitle] = React.useState('');
   const [task, setTask] = React.useState('');
   const [allTasks, setAllTasks] = React.useState([]);
   const [status, setStatus] = React.useState('pendente');
   const [data, setData] = React.useState();
+  const [selectedValue, setSelectedValue] = React.useState('all');
 
 //Aqui deleta tarefa
  async function handleDelete(id) {
@@ -30,6 +49,42 @@ function App() {
    if(deletedTask){
      setAllTasks(allTasks.filter(task => task._id !== id))
    }
+}
+
+// Function para pegar tasks em andamento
+async function tasksInProgress(e){
+  if(e.target.value ==="andamento"){
+  setAllTasks(allTasks.filter(task => task.status ==="andamento"))
+  }
+  else{
+    getAllTasks()
+  }
+}
+
+async function tasksDone(e){
+  if(e.target.value ==="pronto"){
+  setAllTasks(allTasks.filter(task => task.status ==="pronto"))
+  }
+  else{
+    getAllTasks()
+  }
+}
+
+async function tasksPending(e){
+  if(e.target.value ==="pendente"){
+  setAllTasks(allTasks.filter(task => task.status ==="pendente"))
+  }
+  else{
+    getAllTasks()
+  }
+}
+
+// Função para mudar a prioridade de true para false
+async function handleChangePriority(id) {
+  const task = await api.post(`priorities/${id}`);
+  if(task) {
+    getAllTasks();
+  }
 }
 
 //Aqui cria novas tarefas
@@ -71,7 +126,13 @@ function App() {
             <input type="date" value={data} onChange={e=>setData(e.target.value)}></input>
           </div>
           <button type="submit">Salvar</button>
-          <RadioButton/>
+          <RadioButton 
+          selectedValue={selectedValue} 
+          handleChange={handleChange}
+          tasksInProgress={tasksInProgress}
+          tasksDone={tasksDone}
+          tasksPending={tasksPending}
+          />
         </form>
       </aside>
       <main>
@@ -80,6 +141,7 @@ function App() {
           <Tasks key={ data._id }
           data={data}
           handleDelete={handleDelete}
+          handleChangePriority={handleChangePriority}
           />
         ))}
       </ul>

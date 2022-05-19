@@ -4,15 +4,12 @@ import './style.css';
 import './style-priority.css';
 import api from '../../services/api';
 
-function Tasks({data, handleDelete}){
+function Tasks({data, handleDelete, handleChangePriority}){
   const [changedTask, setChangedTask] = React.useState('');
-  const [changeStatus, setChangeStatus] = React.useState('')
-  console.log(changeStatus)
-  async function handleSave(e){
-    if(changedTask || changeStatus){
-      await api.put(`/content/${data._id}`,{
+  async function handleSave(e,notes){
+    if(changedTask && changedTask !== notes){
+      await api.post(`/content/${data._id}`,{
         task:changedTask,
-        status:changeStatus,
       })
     }
   }
@@ -31,17 +28,10 @@ function Tasks({data, handleDelete}){
         <textarea 
         defaultValue={data.task} 
         onChange={e => setChangedTask(e.target.value) }
-        onBlur= {e=> handleSave(e)}
+        onBlur= {e=> handleSave(e.target, data.notes)}
         />
-        <span><AiOutlineExclamationCircle size="24"/></span>
-        <select name="status" defaultValue={data.status} 
-        onChange={e=>setChangeStatus(e.target.value)}
-        onBlur={e=>handleSave(e)}
-        >
-              <option value="pendente" >pendente</option>
-              <option value="andamento">andamento</option>
-              <option value="pronto">pronto</option>
-        </select>
+        <span><AiOutlineExclamationCircle size="24" onClick={() => handleChangePriority(data._id)} /></span>
+        <span>{data.status}</span>
         <span>{data.date}</span>
         </li>
        </>

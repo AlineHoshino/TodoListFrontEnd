@@ -1,0 +1,12 @@
+#buttons-filter{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    border-radius: 5px;
+    padding:5px;
+    background-color: #FFD3CA;
+    border: white;
+}
