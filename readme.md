@@ -3,10 +3,12 @@
 Project that helps people to be more organized and productive
 
 ## Technologies
+<div style="display: inline_block">
 <img  height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" />
 <img  height="30" width="40"src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg" />
 <img  height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
 <img  height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
+</div>
 
 ## Project explanation
 
@@ -45,6 +47,6 @@ Start the frontend with the command:
           
  ## Study sources
 
- [canal do youtube Code Zero](https://www.youtube.com/watch?v=BrHHZ_bmzrk&list=PL0QN_lbTofYcw7bzm8y-l2BMslKfMfNgr&index=8)
- [Trybe website](https://www.betrybe.com/)
- 
+ - [canal do youtube Code Zero](https://www.youtube.com/watch?v=BrHHZ_bmzrk&list=PL0QN_lbTofYcw7bzm8y-l2BMslKfMfNgr&index=8)
+ - [Trybe website](https://www.betrybe.com/)
+
